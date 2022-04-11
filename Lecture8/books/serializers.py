@@ -54,6 +54,21 @@ class BookSerializer(serializers.ModelSerializer):
 class BookDetailSerializer(BookSerializer):
     publisher = PublisherSerializer(read_only=True)
     book_authors = AuthorSerializer(source='authors', many=True, read_only=True)
+    cover = serializers.ImageField(write_only=True, required=False)
+    document = serializers.FileField(write_only=True, required=False)
+    cover_url = serializers.SerializerMethodField(read_only=True)
+    document_url = serializers.SerializerMethodField(read_only=True)
 
     class Meta(BookSerializer.Meta):
-        fields = BookSerializer.Meta.fields + ('publisher', 'book_authors',)
+        fields = BookSerializer.Meta.fields + (
+            'publisher', 'book_authors', 'cover_url', 'document_url', 'cover', 'document')
+
+    def get_cover_url(self, obj):
+        if obj.cover:
+            return self.context['request'].build_absolute_uri(obj.cover.url)
+        return None
+
+    def get_document_url(self, obj):
+        if obj.document:
+            return self.context['request'].build_absolute_uri(obj.document.url)
+        return None

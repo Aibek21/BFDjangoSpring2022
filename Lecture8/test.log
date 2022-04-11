@@ -1,0 +1,4 @@
+INFO -- 2022-04-11 12:42:21,269: some info message
+WARNING -- 2022-04-11 12:42:21,269: some warning message
+ERROR -- 2022-04-11 12:42:21,269: some error message
+CRITICAL -- 2022-04-11 12:42:21,269: some critical message

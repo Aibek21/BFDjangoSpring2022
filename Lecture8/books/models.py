@@ -2,6 +2,8 @@ import uuid
 from django.db import models
 
 from utils.constants import USER_TYPES, SUPERADMIN
+from utils.validators import validate_image_size, validate_image_extension, validate_file_size, validate_file_extension
+from utils.upload import book_image_directory_path, book_file_directory_path
 
 
 class City(models.Model):
@@ -84,6 +86,12 @@ class Book(models.Model):
     publication_date = models.DateTimeField(null=True, blank=True)
     num_pages = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
+    cover = models.ImageField(upload_to=book_image_directory_path,
+                              validators=[validate_image_size, validate_image_extension],
+                              blank=True, null=True)
+    document = models.FileField(upload_to=book_file_directory_path,
+                                validators=[validate_file_size, validate_file_extension],
+                                blank=True, null=True)
     authors = models.ManyToManyField(Author)
     publisher = models.OneToOneField(Publisher, on_delete=models.PROTECT, null=True, blank=True)
 

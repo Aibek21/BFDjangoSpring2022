@@ -1,10 +1,14 @@
+import logging
 from rest_framework.decorators import api_view
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status, mixins, generics
 
 from books.models import Book
 from books.serializers import BookSerializer, BookDetailSerializer
+
+logger = logging.getLogger(__name__)
 
 
 @api_view(['GET', 'POST'])
@@ -23,6 +27,11 @@ def book_list(request):
 class BookListAPIView(APIView):
 
     def get(self, request):
+        logger.debug('some debug message')
+        logger.info('some info message')
+        logger.warning('some warning message')
+        logger.error('some error message')
+        logger.critical('some critical message')
         books = Book.objects.all()
         serializer = BookSerializer(books, many=True)
         return Response(serializer.data)
@@ -73,3 +82,4 @@ class BookAPIView(generics.ListCreateAPIView):
 class BookDetailApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookDetailSerializer
+    parser_classes = (MultiPartParser, FormParser, JSONParser)

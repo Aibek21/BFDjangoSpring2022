@@ -1,0 +1,5 @@
+2022-04-11 18:30:13,158 -- DEBUG:10 -- debug log
+2022-04-11 18:30:13,158 -- INFO:20 -- info log
+2022-04-11 18:30:13,158 -- WARNING:30 -- warning log
+2022-04-11 18:30:13,158 -- ERROR:40 -- error log
+2022-04-11 18:30:13,158 -- CRITICAL:50 -- critical log

@@ -1,0 +1,5 @@
+2022-04-11 18:23:37,801 -- DEBUG:10 -- debug log Someone
+2022-04-11 18:23:37,801 -- INFO:20 -- info log
+2022-04-11 18:23:37,801 -- WARNING:30 -- warning log
+2022-04-11 18:23:37,802 -- ERROR:40 -- error log
+2022-04-11 18:23:37,802 -- CRITICAL:50 -- critical log
